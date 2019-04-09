@@ -9,6 +9,13 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
     {
         public string Nombre {get; set;}
         public bool Obtenida {get; set;}
-        public bool Repetida {get; set;}
+        public int Repetida {get; set;}
+
+        public Jugador(string nombre)
+        {
+            Nombre = nombre;
+            Obtenida = false;
+            Repetida = 0;
+        }
     }
 }
