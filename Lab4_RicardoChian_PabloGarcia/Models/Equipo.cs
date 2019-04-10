@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Lab4_RicardoChian_PabloGarcia.Models
 {
-    public class Equipo
+    public class Equipo : IComparable
     {
         [Display(Name = "Equipo")]
         public string NombreEquipo { get; set; }
@@ -58,6 +58,8 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
 
         public void Calcular()
         {
+            Obtenidas = 0;
+            Faltantes = 0;
             foreach (var item in Jugadores)
             {
                 if (item.Obtenida)
@@ -69,6 +71,13 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
                     Faltantes++;
                 }
             }
+        }
+
+        public int CompareTo(object obj)
+        {
+            var comparer = (Equipo) obj;
+
+            return NombreEquipo.CompareTo(comparer.NombreEquipo);
         }
     }
 }

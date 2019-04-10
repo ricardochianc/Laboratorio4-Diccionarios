@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Lab4_RicardoChian_PabloGarcia.Declaradores;
+using Lab4_RicardoChian_PabloGarcia.Models;
 
 namespace Lab4_RicardoChian_PabloGarcia.Controllers
 {
@@ -15,16 +16,73 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
             return View();
         }
 
-        public ActionResult MostrarDatosEquipo()
+        public ActionResult VerEquipos()
         {
-            return View();
+            return View(Data.Instance.AlbumUCL._Equipos);
+        }
+
+        public ActionResult DetailsEquipo(string id)
+        {
+
+            return View(Data.Instance.AlbumUCL.Equipos[id].Jugadores);
+        }
+
+        public ActionResult EditarJugador(string id)
+        {
+            return View(Data.Instance.AlbumUCL.General[id]);
         }
 
         [HttpPost]
-        public ActionResult MostrarDatosEquipo(int i)
+        public ActionResult EditarJugador(string id,FormCollection collection)
         {
-            return View();
-        }
+            bool obtenida = false;
 
+            var aux = collection["check"];
+            
+            if (aux == "si" || aux == "Si" || aux == "SI")
+            {
+                obtenida = true;
+            }
+            else
+            {
+                obtenida = false;
+            }
+
+            
+            var repetida = int.Parse(collection["Repetida"]);
+
+            Data.Instance.AlbumUCL.General[id].Obtenida = obtenida;
+            Data.Instance.AlbumUCL.General[id].Repetida = repetida;
+
+            Predicate<Jugador> BuscadorJugador = (Jugador jugador) => { return jugador.Nombre == id; };
+
+
+            Data.Instance.AlbumUCL._General.Find(BuscadorJugador).Obtenida = obtenida;
+            Data.Instance.AlbumUCL._General.Find(BuscadorJugador).Repetida = repetida;
+
+            foreach (var item in Data.Instance.AlbumUCL.Equipos)
+            {
+                try
+                {
+                    item.Value.Jugadores.Find(BuscadorJugador).Obtenida = obtenida;
+                    item.Value.Jugadores.Find(BuscadorJugador).Repetida = repetida;
+
+                    var name = item.Key;
+
+                    Predicate<Equipo> BuscadorEquipo = (Equipo equipo) => { return equipo.NombreEquipo == name; };
+
+                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Jugadores.Find(BuscadorJugador).Obtenida = obtenida;
+                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Jugadores.Find(BuscadorJugador).Repetida = repetida;
+                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Calcular();
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
+
+
+            return RedirectToAction("VerEquipos");
+        }
     }
 }
