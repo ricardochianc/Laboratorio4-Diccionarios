@@ -22,7 +22,7 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
         [Display(Name = "Obtenidas")]
         public int Faltantes { get; set; }
 
-        public Equipo(string nombreEquipo, string pais, List<string> players)
+        public Equipo(string nombreEquipo, string pais, List<int> players)
         {
             NombreEquipo = nombreEquipo;
             Pais = pais;
@@ -54,7 +54,6 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
                     }
                 }
             }
-            Jugadores.Sort();
         }
 
         public void Calcular()

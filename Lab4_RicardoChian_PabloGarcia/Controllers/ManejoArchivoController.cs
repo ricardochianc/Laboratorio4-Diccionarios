@@ -37,12 +37,12 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
                 foreach (var fila in CsvData.Split('\n'))
                 {
-                    fila.Trim();
+                    var _fila  = fila.Trim();
 
                     if (!string.IsNullOrEmpty(fila))
                     {
-                        var linea = fila.Split(',');
-                        var listaJugadores = new List<string>();
+                        var linea = _fila.Split(',');
+                        var listaJugadores = new List<int>();
 
                         foreach (var num in linea)
                         {
@@ -50,9 +50,11 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
                             if (int.TryParse(num, out No))
                             {
-                                listaJugadores.Add(num);
+                                listaJugadores.Add(int.Parse(num));
                             }
                         }
+
+                        listaJugadores.Sort();
                         var equipo = new Equipo(linea[0],linea[1],listaJugadores);
                         equipo.Calcular();
                         Data.Instance.AlbumUCL.Equipos.Add(equipo.NombreEquipo,equipo);
@@ -63,7 +65,7 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
                 Directory.Delete(path);
             }
             
-            return RedirectToAction("Index","Album");
+            return RedirectToAction("Index","Home");
         }
     }
 }
