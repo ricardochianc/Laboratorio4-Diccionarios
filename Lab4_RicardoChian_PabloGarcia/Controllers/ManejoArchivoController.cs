@@ -58,6 +58,12 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
                         var equipo = new Equipo(linea[0],linea[1],listaJugadores);
                         equipo.Calcular();
                         Data.Instance.AlbumUCL.Equipos.Add(equipo.NombreEquipo,equipo);
+
+                        foreach (var eq in equipo.Jugadores)
+                        {
+                            Data.Instance.AlbumUCL.General.Add(eq.Nombre,eq);
+                        }
+
                     }
                 }
                 
