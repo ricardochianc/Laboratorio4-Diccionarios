@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,15 +8,27 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
 {
     public class Equipo
     {
-        public string NombreEquipo {get;set;}
-        public List<Jugador> Jugadores {get; set;}
+        [Display(Name = "Equipo")]
+        public string NombreEquipo { get; set; }
 
-        public Equipo(string nombreEquipo, List<string> players)
+        [Display(Name = "País")]
+        public string Pais { get; set; }
+
+        public List<Jugador> Jugadores { get; set; }
+
+        [Display(Name = "Faltantes")]
+        public int Obtenidas { get; set; }
+
+        [Display(Name = "Obtenidas")]
+        public int Faltantes { get; set; }
+
+        public Equipo(string nombreEquipo, string pais, List<string> players)
         {
             NombreEquipo = nombreEquipo;
+            Pais = pais;
             Jugadores = new List<Jugador>(25);
 
-            for(int i = 0; i < 25; i++)
+            for(int i = 0; i < Jugadores.Capacity; i++)
             {
                 var j = new Jugador(NombreEquipo + (i+1));
                 Jugadores.Add(j);
@@ -39,6 +52,22 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
                         }
 
                     }
+                }
+            }
+            Jugadores.Sort();
+        }
+
+        public void Calcular()
+        {
+            foreach (var item in Jugadores)
+            {
+                if (item.Obtenida)
+                {
+                    Obtenidas++;
+                }
+                else
+                {
+                    Faltantes++;
                 }
             }
         }

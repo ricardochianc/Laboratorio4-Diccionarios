@@ -24,6 +24,6 @@ namespace Lab4_RicardoChian_PabloGarcia.Declaradores
         
         }
 
-        public Album album = new Album();
+        public Album AlbumUCL = new Album();
     }
 }

@@ -7,8 +7,8 @@ namespace Lab4_RicardoChian_PabloGarcia.Models
 {
     public class Album
     {
-        public static Dictionary<string, Equipo> equipos = new Dictionary<string, Equipo>();
-        public static Dictionary<string, Jugador> general = new Dictionary<string, Jugador>();
+        public Dictionary<string, Equipo> Equipos = new Dictionary<string, Equipo>();
+        public Dictionary<string, Jugador> General = new Dictionary<string, Jugador>();
 
         public Album()
         {
