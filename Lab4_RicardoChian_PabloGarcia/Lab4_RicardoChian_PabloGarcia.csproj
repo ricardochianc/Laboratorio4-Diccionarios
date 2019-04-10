@@ -173,9 +173,9 @@
     <Content Include="Views\ManejoArchivo\CargarArchivo.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\VerEquipos.cshtml" />
-    <Content Include="Views\Album\JugadoresEquipos.cshtml" />
     <Content Include="Views\Album\DetailsEquipo.cshtml" />
     <Content Include="Views\Album\EditarJugador.cshtml" />
+    <Content Include="Views\Album\VerGeneral.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

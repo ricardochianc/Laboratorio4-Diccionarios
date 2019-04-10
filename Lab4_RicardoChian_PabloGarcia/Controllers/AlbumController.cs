@@ -84,5 +84,17 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
             return RedirectToAction("VerEquipos");
         }
+
+
+        public ActionResult VerGeneral()
+        {
+            return View(Data.Instance.AlbumUCL._General);
+        }
+
+        public ActionResult DetallesGeneral(string id)
+        {
+            var ID = id;
+            return RedirectToAction("EditarJugador","Album",new {id = ID});
+        }
     }
 }
