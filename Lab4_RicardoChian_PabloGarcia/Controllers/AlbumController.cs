@@ -37,13 +37,13 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
         {
             bool obtenida = false;
 
-            var aux = collection["check"];
+            var aux = collection["check"].ToUpper();
             
-            if (aux == "si" || aux == "Si" || aux == "SI")
+            if (aux == "SI")
             {
                 obtenida = true;
             }
-            else
+            else if(aux == "NO")
             {
                 obtenida = false;
             }
