@@ -24,7 +24,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Repetida)
         </th>
-        <th></th>
+        <th>Editar Jugador</th>
     </tr>
 
     @foreach (var item in Model)
@@ -40,7 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Repetida)
             </td>
             <td>
-                @Html.ActionLink("Details", "DetallesGeneral", new { id=item.Nombre })
+                @Html.ActionLink("Editar", "DetallesGeneral", new { id=item.Nombre })
             </td>
         </tr>
     }
