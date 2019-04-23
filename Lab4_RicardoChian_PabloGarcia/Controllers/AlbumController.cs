@@ -18,7 +18,7 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
         public ActionResult VerEquipos()
         {
-            return View(Data.Instance.AlbumUCL._Equipos);
+            return View(Data.Instance.AlbumUCL.Equipos.Values);
         }
 
         public ActionResult DetailsEquipo(string id)
@@ -56,10 +56,6 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
             Predicate<Jugador> BuscadorJugador = (Jugador jugador) => { return jugador.Nombre == id; };
 
-
-            Data.Instance.AlbumUCL._General.Find(BuscadorJugador).Obtenida = obtenida;
-            Data.Instance.AlbumUCL._General.Find(BuscadorJugador).Repetida = repetida;
-
             foreach (var item in Data.Instance.AlbumUCL.Equipos)
             {
                 try
@@ -69,11 +65,7 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
                     var name = item.Key;
 
-                    Predicate<Equipo> BuscadorEquipo = (Equipo equipo) => { return equipo.NombreEquipo == name; };
-
-                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Jugadores.Find(BuscadorJugador).Obtenida = obtenida;
-                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Jugadores.Find(BuscadorJugador).Repetida = repetida;
-                    Data.Instance.AlbumUCL._Equipos.Find(BuscadorEquipo).Calcular();
+                    Data.Instance.AlbumUCL.Equipos[name].Calcular();
                 }
                 catch (Exception e)
                 {
@@ -88,7 +80,7 @@ namespace Lab4_RicardoChian_PabloGarcia.Controllers
 
         public ActionResult VerGeneral()
         {
-            return View(Data.Instance.AlbumUCL._General);
+            return View(Data.Instance.AlbumUCL.General.Values);
         }
 
         public ActionResult DetallesGeneral(string id)
